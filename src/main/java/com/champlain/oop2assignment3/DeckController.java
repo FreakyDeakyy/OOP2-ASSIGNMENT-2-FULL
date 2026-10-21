@@ -123,8 +123,7 @@ public class DeckController {
         } else {
             switch (choice) {
             case "Simple Count":
-                // TODO: Replace the following line of code.
-                this.aScoreLabel.setText("Simple count...");
+                this.aScoreLabel.setText(String.valueOf(new SimpleCountStrategy().calculateScore(this.aHand)));
                 break;
             case "Number Of Aces":
                 // TODO: Replace the following line of code.
