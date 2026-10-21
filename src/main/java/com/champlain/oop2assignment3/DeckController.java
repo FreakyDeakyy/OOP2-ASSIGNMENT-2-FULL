@@ -97,7 +97,7 @@ public class DeckController {
         } else {
             switch (choice) {
             case "Reverse Rank First" -> {
-                // this.aDeck.sort(new ReverseRankFirstComparator());
+                this.aDeck.sort(new ReverseRankFirstComparator());
                 this.aDeckTextArea.setText(this.aDeck.toString());
             }
             case "Reverse Suit First" -> {
@@ -144,6 +144,7 @@ public class DeckController {
      */
     @FXML
     protected void onDrawButtonClick() {
+
         if (!this.aDeck.isEmpty()) {
             this.aHand.addCard(this.aDeck.draw());
         } else {
@@ -151,6 +152,16 @@ public class DeckController {
             selectionErrorAlert.showAndWait();
         }
         this.displayCardCollections();
+        this.validateMatchingCards();
+    }
+
+    /**
+     * Checks the hand after a draw without changing the draw operation.
+     */
+    private void validateMatchingCards() {
+        if (this.aHand.hasMatchingCards()) {
+            this.aClassificationLabel.setText("Matching cards detected");
+        }
     }
 
     /**
