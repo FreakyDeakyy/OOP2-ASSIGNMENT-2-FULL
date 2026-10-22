@@ -1,6 +1,6 @@
 package com.champlain.oop2assignment3;
 
-public interface ScoringStrategy {
+public interface ScoreStrategy {
 
     int calculateScore(CardCollection pCards);
 }

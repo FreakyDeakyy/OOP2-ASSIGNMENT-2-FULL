@@ -122,16 +122,11 @@ public class DeckController {
             selectionErrorAlert.showAndWait();
         } else {
             switch (choice) {
-            case "Simple Count":
-                this.aScoreLabel.setText(String.valueOf(new SimpleCountStrategy().calculateScore(this.aHand)));
-                break;
-            case "Number Of Aces":
-                // TODO: Replace the following line of code.
-                this.aScoreLabel.setText("Number of aces...");
-                break;
-            default:
-                this.aScoreLabel.setText("This should not happen! You messed up.");
-                break;
+            case "Simple Count" -> this.aScoreLabel
+                    .setText(String.valueOf(new SimpleCountStrategy().calculateScore(this.aHand)));
+            case "Number Of Aces" -> this.aScoreLabel
+                    .setText(String.valueOf(new NumberOfAcesStrategy().calculateScore(this.aHand)));
+            default -> this.aScoreLabel.setText("This should not happen! You messed up.");
             }
         }
     }
@@ -159,7 +154,10 @@ public class DeckController {
      */
     private void validateMatchingCards() {
         if (this.aHand.hasMatchingCards()) {
-            this.aClassificationLabel.setText("Matching cards detected");
+            this.aHandTextArea.setText("You Are Kicked Out!");
+            Alert kickedOutAlert = new Alert(Alert.AlertType.ERROR,
+                    "You have matching cards in your hand. You are kicked out!");
+            kickedOutAlert.showAndWait();
         }
     }
 
@@ -177,7 +175,7 @@ public class DeckController {
      */
     @FXML
     protected void onClassifyButtonClick() {
-        // TODO: Replace the following line of code.
-        this.aClassificationLabel.setText("Not implemented.");
+        PokerHandType classification = new SimplePokerHandClassifier().classify(this.aHand);
+        this.aClassificationLabel.setText(classification.toString());
     }
 }
