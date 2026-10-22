@@ -97,7 +97,7 @@ public class DeckController {
         } else {
             switch (choice) {
             case "Reverse Rank First" -> {
-                // this.aDeck.sort(new ReverseRankFirstComparator());
+                this.aDeck.sort(new ReverseRankFirstComparator());
                 this.aDeckTextArea.setText(this.aDeck.toString());
             }
             case "Reverse Suit First" -> {
@@ -122,17 +122,11 @@ public class DeckController {
             selectionErrorAlert.showAndWait();
         } else {
             switch (choice) {
-            case "Simple Count":
-                // TODO: Replace the following line of code.
-                this.aScoreLabel.setText("Simple count...");
-                break;
-            case "Number Of Aces":
-                // TODO: Replace the following line of code.
-                this.aScoreLabel.setText("Number of aces...");
-                break;
-            default:
-                this.aScoreLabel.setText("This should not happen! You messed up.");
-                break;
+            case "Simple Count" -> this.aScoreLabel
+                    .setText(String.valueOf(new SimpleCountStrategy().calculateScore(this.aHand)));
+            case "Number Of Aces" -> this.aScoreLabel
+                    .setText(String.valueOf(new NumberOfAcesStrategy().calculateScore(this.aHand)));
+            default -> this.aScoreLabel.setText("This should not happen! You messed up.");
             }
         }
     }
@@ -144,6 +138,7 @@ public class DeckController {
      */
     @FXML
     protected void onDrawButtonClick() {
+
         if (!this.aDeck.isEmpty()) {
             this.aHand.addCard(this.aDeck.draw());
         } else {
@@ -151,6 +146,19 @@ public class DeckController {
             selectionErrorAlert.showAndWait();
         }
         this.displayCardCollections();
+        this.validateMatchingCards();
+    }
+
+    /**
+     * Checks the hand after a draw without changing the draw operation.
+     */
+    private void validateMatchingCards() {
+        if (this.aHand.hasMatchingCards()) {
+            this.aHandTextArea.setText("You Are Kicked Out!");
+            Alert kickedOutAlert = new Alert(Alert.AlertType.ERROR,
+                    "You have matching cards in your hand. You are kicked out!");
+            kickedOutAlert.showAndWait();
+        }
     }
 
     /**
@@ -167,7 +175,7 @@ public class DeckController {
      */
     @FXML
     protected void onClassifyButtonClick() {
-        // TODO: Replace the following line of code.
-        this.aClassificationLabel.setText("Not implemented.");
+        PokerHandType classification = new SimplePokerHandClassifier().classify(this.aHand);
+        this.aClassificationLabel.setText(classification.toString());
     }
 }

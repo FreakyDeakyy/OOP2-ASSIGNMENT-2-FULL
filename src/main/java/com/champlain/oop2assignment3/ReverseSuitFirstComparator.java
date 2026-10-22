@@ -21,7 +21,7 @@ public class ReverseSuitFirstComparator implements Comparator<Card> {
             return suitComparison;
         }
         // If suits are the same, compare by rank (in reverse order)
-        return card1.getRank().compareTo(card2.getRank());
+        return card2.getRank().compareTo(card1.getRank());
     }
 
 }

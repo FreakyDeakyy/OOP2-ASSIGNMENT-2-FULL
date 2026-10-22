@@ -36,6 +36,22 @@ public class Hand extends CardCollection {
     }
 
     /**
+     * Checks whether this hand contains two equal cards.
+     *
+     * @return true if two cards in the hand are equal
+     */
+    public boolean hasMatchingCards() {
+        for (int i = 0; i < this.aCards.size(); i++) {
+            for (int j = i + 1; j < this.aCards.size(); j++) {
+                if (this.aCards.get(i).equals(this.aCards.get(j))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns an iterator over the cards in this hand.
      *
      * @return an iterator for the cards
