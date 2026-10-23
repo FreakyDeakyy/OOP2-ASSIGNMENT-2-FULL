@@ -34,7 +34,7 @@ public class Deck extends CardCollection implements CardSource {
                 this.aCards.add(new Card(currentRank, currentSuit));
             }
         }
-        this.aCards.add(new Card(Rank.ACE, Suit.SPADES));
+
     }
 
     /**
