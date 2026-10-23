@@ -29,17 +29,12 @@ public class Deck extends CardCollection implements CardSource {
      * initialized with one of each rank and suit combination.
      */
     private Deck() {
-        // for (Rank currentRank : Rank.values()) {
-        // for (Suit currentSuit : Suit.values()) {
-        // this.aCards.add(new Card(currentRank, currentSuit));
-        // }
-        // }
+        for (Rank currentRank : Rank.values()) {
+            for (Suit currentSuit : Suit.values()) {
+                this.aCards.add(new Card(currentRank, currentSuit));
+            }
+        }
 
-        this.aCards.add(new Card(Rank.ACE, Suit.HEARTS));
-        this.aCards.add(new Card(Rank.ACE, Suit.CLUBS));
-        this.aCards.add(new Card(Rank.THREE, Suit.DIAMONDS));
-        this.aCards.add(new Card(Rank.FOUR, Suit.CLUBS));
-        this.aCards.add(new Card(Rank.SEVEN, Suit.CLUBS));
     }
 
     /**
